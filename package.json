@@ -15,5 +15,17 @@
     "morgan": "~1.6.1",
     "pg": "^4.4.3",
     "serve-favicon": "~2.3.0"
-  }
+  },
+  "description": "Transaction and migration lecture exercise.",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IsaacLessard/farms-knex.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IsaacLessard/farms-knex/issues"
+  },
+  "homepage": "https://github.com/IsaacLessard/farms-knex#readme"
 }

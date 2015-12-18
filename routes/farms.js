@@ -14,13 +14,23 @@ router.get('/', function(req, res, next) {
   });
 });
 
-
 router.post('/', function (req, res, next) {
-  Farms().insert({
-    name: req.body.name,
-  }, 'id')
-  .then(function (farmid) {
-    res.json(farmid)
+  knex.transaction(function (trx) {
+    return Farms().insert({
+      name: req.body.name,
+    }, 'id')
+    .transacting(trx)
+    .then(function (farm) {
+      return farmsAlpacas().insert({
+        farm_id: farm[0],
+        alpaca_id: req.body.alpaca_id
+      }, 'id')
+      .transacting(trx)
+    })
+    .then(trx.commit)
+    .catch(trx.rollback)
+  }).then(function (result) {
+    res.json(result)
   }).catch(function (err) {
     res.json(err);
   });
